@@ -1,0 +1,59 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+.gitattributes
+.vs/ProjectSettings.json
+.vs/ProjetDD/FileContentIndex/22d89ae4-f637-4328-8d46-91b37556879c.vsidx
+.vs/ProjetDD/FileContentIndex/e637f884-7d6c-43f2-b272-cf6e7c84d115.vsidx
+*.lock
+.vs/ProjetDD/v17/.suo
+*.db
+*.db-shm
+*.db-wal
+*.opendb
+*.ipch
+*.sqlite
+*.json
+*.vcxproj
+*.sln
+*.filters
+*.user
+*.recipe
+*.ilk
+*.log
+*.pdb
+*.tlog
+*.txt
+*.idb
+*.iobj
+*.ipdb
+*.png

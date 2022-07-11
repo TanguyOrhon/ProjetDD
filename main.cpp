@@ -2,15 +2,14 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include "Personnages.cpp"
+#include "Personnages.h"
+#include "Clavier.h"
 
 int main()
 {
-	sf::Texture dragon;
-	dragon.loadFromFile("tiles/dragon.png");
-	sf::Sprite sprite_dragon(dragon);
-	sf::RenderWindow window(sf::VideoMode(1600, 900), "SFML works!");
-
+	Personnage persoprincipal("tiles/principal.png");
+	sf::RenderWindow window(sf::VideoMode(1600, 900), "ProjetDD");
+	window.setPosition(sf::Vector2i(0, 0));
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -18,11 +17,13 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-		}
 
-		window.clear();
-		window.draw(sprite_dragon);
+		}
+		gestionclavier(persoprincipal);
+
+		window.draw(persoprincipal.getSprite());
 		window.display();
+		window.clear();
 	}
 
 	return 0;

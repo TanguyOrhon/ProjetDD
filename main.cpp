@@ -3,28 +3,25 @@
 #include <string>
 #include <iostream>
 #include "Personnages.h"
-#include "Clavier.h"
+#include "Window.h"
 
 int main()
 {
 	Personnage persoprincipal("tiles/principal1.png");
-	sf::RenderWindow window(sf::VideoMode(1600, 900), "ProjetDD");
-	window.setPosition(sf::Vector2i(0, 0));
-	while (window.isOpen())
+	Window window(persoprincipal);
+
+	for (auto last_five_seconds = int(window.elapsed());
+		window.step(); )
 	{
-		sf::Event event;
-		while (window.pollEvent(event))
+		const auto second = int(window.elapsed());
+		if (second >= last_five_seconds + 5)
 		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-
+			std::cout << second << " seconds elapsed\n";
+			last_five_seconds = second;
 		}
-		gestionclavier(persoprincipal);
-
-		window.draw(persoprincipal.getSprite());
-		window.display();
-		window.clear();
 	}
+
+	
 
 	return 0;
 }

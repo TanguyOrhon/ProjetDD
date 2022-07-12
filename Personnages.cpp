@@ -1,13 +1,11 @@
 #include "Personnages.h"
 
 Personnage::Personnage(const char* texture) :
-	texture_{},
-	sprite_{},
 	x_{ 200.0 },
 	y_{ 200.0 },
-	x_speed_{ 1.0 },
-	y_speed_{ 1.0 },
-	anim_{ 16,16 }
+	x_speed_{ 10.0 },
+	y_speed_{ 10.0 },
+	anim_{ 0,0 }
 {
 	if (!texture_.loadFromFile(texture))
 	{
@@ -24,9 +22,11 @@ void Personnage::move(float x, float y) {
 	sprite_.setPosition(sf::Vector2f(x_, y_));
 }
 
-void Personnage::animation(float x, float y) {
-	fpsCount_ += fps_ * 0.5*time.restart().asSeconds();
-	if (fpsCount_ >= fps_) {
+void Personnage::animation(float x, float y, double time) {
+	fps_ += fps_ + fps_speed_ * time;
+	std::cout << "test" << time << "\n";
+	if (fps_ >= switchfps_) {
+		fps_ = 0;
 		anim_.x += 32;
 		if (anim_.x >= texture_.getSize().x) {
 			anim_.x = 0;

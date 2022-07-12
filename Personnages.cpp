@@ -15,7 +15,7 @@ Personnage::Personnage(const char* texture) :
 	}
 	sprite_.setTexture(texture_);
 	sprite_.setPosition(sf::Vector2f(x_, y_));
-	sprite_.setTextureRect(sf::IntRect(16, 16, 48, 64));
+	sprite_.setTextureRect(sf::IntRect(0, 0, 32, 48));
 }
 
 void Personnage::move(float x, float y) {
@@ -24,12 +24,16 @@ void Personnage::move(float x, float y) {
 	sprite_.setPosition(sf::Vector2f(x_, y_));
 }
 
-void Personnage::animation() {
-	anim_.x += 48;
-	if (anim_.x >= texture_.getSize().x) {
-		anim_.x = 20;
-		std::cout <<texture_.getSize().y<<"\n";
-
+void Personnage::animation(float x, float y) {
+	fpsCount_ += fps_ * 0.5*time.restart().asSeconds();
+	if (fpsCount_ >= fps_) {
+		anim_.x += 32;
+		if (anim_.x >= texture_.getSize().x) {
+			anim_.x = 0;
+		}
+		sprite_.setTextureRect(sf::IntRect(anim_.x, anim_.y, 32, 48));
+		move(x, y);
 	}
-	sprite_.setTextureRect(sf::IntRect(anim_.x, anim_.y, 32, 64));
+
+
 }

@@ -7,24 +7,20 @@
 
 void gestionclavier(Personnage& perso) {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-		perso.setAnim_y(16);
-		perso.animation();
-		perso.move(0.0, 1.0);
+		perso.setAnim_y(0);
+		perso.animation(0.0, 1.0);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-		perso.setAnim_y(246);
-		perso.animation();
-		perso.move(0.0, -1.0);
+		perso.setAnim_y(144);
+		perso.animation(0.0, -1.0);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-		perso.setAnim_y(169);
-		perso.animation();
-		perso.move(1.0, 0.0);
+		perso.setAnim_y(96);
+		perso.animation(1.0, 0.0);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-		perso.setAnim_y(92);
-		perso.animation();
-		perso.move(-1.0, 0.0);
+		perso.setAnim_y(48);
+		perso.animation(-1.0, 0.0);
 	}
 }
 #endif

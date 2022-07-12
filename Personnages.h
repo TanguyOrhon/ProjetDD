@@ -10,12 +10,13 @@ public:
 	sf::Sprite getSprite() {
 		return sprite_;
 	}
+
 	void setAnim_y(unsigned int dir) {
 		anim_.y = dir;
 	}
 
 	void move(float x, float y);
-	void animation();
+	void animation(float x, float y);
 
 private:
 	sf::Texture texture_;
@@ -23,6 +24,8 @@ private:
 	float x_, y_;
 	float x_speed_, y_speed_;
 	sf::Vector2u anim_;
+	sf::Clock time;
+	double fpsCount_ = 0, fps_ = 1000;
 };
 
 

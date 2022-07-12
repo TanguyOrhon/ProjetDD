@@ -7,7 +7,7 @@
 
 int main()
 {
-	Personnage persoprincipal("tiles/principal.png");
+	Personnage persoprincipal("tiles/principal1.png");
 	sf::RenderWindow window(sf::VideoMode(1600, 900), "ProjetDD");
 	window.setPosition(sf::Vector2i(0, 0));
 	while (window.isOpen())

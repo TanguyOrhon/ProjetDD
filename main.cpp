@@ -3,25 +3,25 @@
 #include <string>
 #include <iostream>
 #include "Personnages.h"
-#include "Window.h"
+#include "WIndow.h"
+
 
 int main()
 {
+	sf::RenderWindow window;
+	window.create(sf::VideoMode(1920, 1080), "ProjetDD");
+	window.setPosition(sf::Vector2i(0, 0));
 	Personnage persoprincipal("tiles/principal1.png");
-	Window window(persoprincipal);
-
-	for (auto last_five_seconds = int(window.elapsed());
-		window.step(); )
+	Window window1(persoprincipal, window);
+	while (window.isOpen())
 	{
-		const auto second = int(window.elapsed());
-		if (second >= last_five_seconds + 5)
+		sf::Event event;
+		while (window.pollEvent(event))
 		{
-			std::cout << second << " seconds elapsed\n";
-			last_five_seconds = second;
+			if (event.type == sf::Event::Closed)
+				window.close();
 		}
+		window1.step();
 	}
-
-	
-
 	return 0;
 }

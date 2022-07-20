@@ -19,9 +19,10 @@ public:
 	void setAnim_y(unsigned int dir) {
 		anim_.y = dir;
 	}
-	
+
 	void move(float x, float y);
-	void animation(float x, float y, double time);
+	void animation();
+	void handle_event();
 
 private:
 	sf::Texture texture_;
@@ -29,8 +30,6 @@ private:
 	float x_, y_;
 	float x_speed_, y_speed_;
 	sf::Vector2u anim_;
-	float fps_speed_{100}, fps_{0}, switchfps_{20};
-	
 };
 
 

@@ -21,7 +21,7 @@ public:
 	}
 
 	void move(float x, float y);
-	void animation();
+	void animation(float x, float y);
 	void handle_event();
 
 private:
@@ -30,6 +30,9 @@ private:
 	float x_, y_;
 	float x_speed_, y_speed_;
 	sf::Vector2u anim_;
+	sf::Clock clock_;
+	float fps_;
+	sf::FloatRect hitbox_;
 };
 
 

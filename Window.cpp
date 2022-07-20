@@ -15,7 +15,7 @@ void Window::setView() {
 }
 
 void Window::draw() {
-	setView();
+	//setView();
 	window_.draw(perso_.getSprite());
 }
 

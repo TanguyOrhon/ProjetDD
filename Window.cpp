@@ -1,8 +1,9 @@
 #include "Window.h"
-#include <chrono>
 
-Window::Window(Personnage& perso, sf::RenderWindow& window) :
+
+Window::Window(Personnage& perso, sf::RenderWindow& window, TileMap& map) :
 	perso_{ perso },
+	map_{map},
 	window_{ window }
 {
 	window_size_ = sf::Vector2f(window_.getSize());
@@ -19,8 +20,7 @@ void Window::draw() {
 	window_.draw(perso_.getSprite());
 }
 
-void
-Window::step()
+void Window::step()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 		window_.close();

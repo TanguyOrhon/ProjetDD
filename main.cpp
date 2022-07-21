@@ -3,7 +3,8 @@
 #include <string>
 #include <iostream>
 #include "Personnages.h"
-#include "WIndow.h"
+#include "Window.h"
+#include "Map.h"
 
 
 int main()
@@ -12,7 +13,9 @@ int main()
 	window.create(sf::VideoMode(1920, 1080), "ProjetDD");
 	window.setPosition(sf::Vector2i(0, 0));
 	Personnage persoprincipal("tiles/principal1.png");
-	Window window1(persoprincipal, window);
+	TileMap map("tiles/tileset.png","map.txt");
+	Window main_window(persoprincipal, window, map);
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -21,7 +24,7 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		window1.step();
+		main_window.step();
 	}
 	return 0;
 }

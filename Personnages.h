@@ -16,6 +16,9 @@ public:
 	sf::Vector2u getSize() {
 		return texture_.getSize();
 	}
+	sf::FloatRect getHitbox() {
+		return hitbox_;
+	}
 	void setAnim_y(unsigned int dir) {
 		anim_.y = dir;
 	}
@@ -23,6 +26,7 @@ public:
 	void move(float x, float y);
 	void animation(float x, float y);
 	void handle_event();
+	void collision(sf::FloatRect& otherhibox);
 
 private:
 	sf::Texture texture_;

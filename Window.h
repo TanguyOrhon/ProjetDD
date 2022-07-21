@@ -5,11 +5,12 @@
 #include <string>
 #include <iostream>
 #include "Personnages.h"
+#include "Map.h"
 
 
 class Window {
 public:
-	Window(Personnage& perso, sf::RenderWindow& window);
+	Window(Personnage& perso, sf::RenderWindow& window, TileMap& map);
 
 	void setView();
 	void draw();
@@ -20,6 +21,7 @@ private:
 	sf::RenderWindow& window_;
 	sf::Vector2f window_size_;
 	Personnage& perso_;
+	TileMap& map_;
 };
 
 

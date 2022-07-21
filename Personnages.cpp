@@ -59,3 +59,9 @@ void Personnage::handle_event()
 		animation(-1.0, 0.0);
 	}
 }
+
+void Personnage::collision(sf::FloatRect& otherhibox) {
+	if (hitbox_.intersects(otherhibox)) {
+		std::cout<<"collision""\n";
+	}
+}

@@ -13,7 +13,7 @@ int main()
 	window.create(sf::VideoMode(1920, 1080), "ProjetDD");
 	window.setPosition(sf::Vector2i(0, 0));
 	Personnage persoprincipal("tiles/principal1.png");
-	TileMap map("tiles/tileset.png","map.txt");
+	TileMap map("tiles/tileset.png","map.txt", 25, 18);
 	Window main_window(persoprincipal, window, map);
 
 	while (window.isOpen())

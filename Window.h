@@ -13,6 +13,7 @@ public:
 	Window(Personnage& perso, sf::RenderWindow& window, TileMap& map);
 
 	void setView();
+	
 	void draw();
 	void step();
 

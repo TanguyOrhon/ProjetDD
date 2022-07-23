@@ -17,6 +17,7 @@ void Window::setView() {
 
 void Window::draw() {
 	//setView();
+	window_.draw(map_);
 	window_.draw(perso_.getSprite());
 }
 

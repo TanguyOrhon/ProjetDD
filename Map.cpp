@@ -1,13 +1,25 @@
 #include "Map.h"
 
 
-TileMap::TileMap(const char* tileset, const char* tiles) 
+TileMap::TileMap(const char* tileset, const char* tiles)
 {
 	if (!m_tileset_.loadFromFile(tileset)) {
 		std::cout << "Pas de tileset";
 	}
 	std::ifstream tiles_(tiles);
 	std::string content_(std::istreambuf_iterator<char>(tiles_), std::istreambuf_iterator<char>());
+}
+
+std::vector<std::string> TileMap::explode(std::string const& s, char delim)
+{
+	std::vector<std::string> result;
+	std::istringstream iss(s);
+
+	for (std::string token; getline(iss, token, delim);)
+	{
+		result.push_back(std::move(token));
+	}
+	return result;
 }
 
 bool TileMap::load(sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height) {
@@ -58,4 +70,3 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	// et on dessine enfin le tableau de vertex
 	target.draw(m_vertices_, states);
 }
-

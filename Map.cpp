@@ -1,30 +1,34 @@
+
 #include "Map.h"
 
 
 TileMap::TileMap(const char* tileset, const char* tiles, unsigned int width, unsigned int height) :
-	width_{std::move(width)},
-	height_{std::move(height)},
-	tileSize_{32,32}
+	width_{ std::move(width) },
+	height_{ std::move(height) },
+	tileSize_{ 32.0,32.0 }
 {
 	if (!m_tileset_.loadFromFile(tileset)) {
 		std::cout << "Pas de tileset";
 	}
 	std::ifstream tiles_(tiles);
-	std::string content_(std::istreambuf_iterator<char>(tiles_), std::istreambuf_iterator<char>());
-	auto exploded = explode(content_, " ");
+	std::string content_((std::istreambuf_iterator<char>(tiles_)), (std::istreambuf_iterator<char>()));
+	auto str = explode(content_, ' ');
+	std::cout << content_ << std::endl;
+	/*
 	int level[450] = {};
 	for (int i = 0; i < 450; i++) {
-		level[i] = std::stoi(exploded[i]);
+		std::cout << str[i];
+		level[i] = std::stoi(str[i]);
 	}
-	load(level);
+	load(level);*/
 }
 
-std::vector<std::string> TileMap::explode(std::string const& s, const char* delim)
+std::vector<std::string> TileMap::explode(std::string const& s, char delim)
 {
 	std::vector<std::string> result;
 	std::istringstream iss(s);
 
-	for (std::string token; getline(iss, token, delim);)
+	for (std::string token; std::getline(iss, token, delim);)
 	{
 		result.push_back(std::move(token));
 	}
@@ -46,8 +50,8 @@ bool TileMap::load(const int* tiles) {
 			int tileNumber = tiles[i + j * width_];
 
 			// on en déduit sa position dans la texture du tileset
-			int tu = tileNumber % (m_tileset_.getSize().x / tileSize_.x);
-			int tv = tileNumber / (m_tileset_.getSize().x / tileSize_.x);
+			int tu = tileNumber % (m_tileset_.getSize().x / int(tileSize_.x));
+			int tv = tileNumber / (m_tileset_.getSize().x / int(tileSize_.x));
 
 			// on récupère un pointeur vers le quad à définir dans le tableau de vertex
 			sf::Vertex* quad = &m_vertices_[(i + j * width_) * 4];

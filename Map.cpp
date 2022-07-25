@@ -1,28 +1,28 @@
-
 #include "Map.h"
 
-
-TileMap::TileMap(const char* tileset, const char* tiles, unsigned int width, unsigned int height) :
+TileMap::TileMap(const char* tileset, const char* maptxt, unsigned int width, unsigned int height) :
 	width_{ std::move(width) },
 	height_{ std::move(height) },
-	tileSize_{ 32.0,32.0 }
+	tileSize_{ 32.0,32.0 },
+	tiles_(maptxt)
 {
 	if (!m_tileset_.loadFromFile(tileset)) {
 		std::cout << "Pas de tileset";
 	}
-	std::ifstream tiles_(tiles);
-	std::string content_((std::istreambuf_iterator<char>(tiles_)), (std::istreambuf_iterator<char>()));
-	auto str = explode(content_, ' ');
-	std::cout << content_ << std::endl;
-	/*
-	int level[450] = {};
-	for (int i = 0; i < 450; i++) {
-		std::cout << str[i];
-		level[i] = std::stoi(str[i]);
-	}
-	load(level);*/
+	create_level();
 }
-
+void TileMap::create_level() {
+	std::string content_((std::istreambuf_iterator<char>(tiles_)), (std::istreambuf_iterator<char>()));
+	std::cout << "test" << content_ << "\n";
+	auto str = explode(content_, ' ');
+	int level[450] = {};
+	int i = 0;
+	for (const std::string s : str) {
+		i += 1;
+		level[i] = std::stoi(s);
+	}
+	load(level);
+}
 std::vector<std::string> TileMap::explode(std::string const& s, char delim)
 {
 	std::vector<std::string> result;
@@ -30,7 +30,8 @@ std::vector<std::string> TileMap::explode(std::string const& s, char delim)
 
 	for (std::string token; std::getline(iss, token, delim);)
 	{
-		result.push_back(std::move(token));
+		result.push_back(token);
+		std::cout << token << "\n";
 	}
 	return result;
 }
@@ -44,8 +45,10 @@ bool TileMap::load(const int* tiles) {
 
 	// on remplit le tableau de vertex, avec un quad par tuile
 	for (unsigned int i = 0; i < width_; ++i)
+	{
 		for (unsigned int j = 0; j < height_; ++j)
 		{
+
 			// on récupère le numéro de tuile courant
 			int tileNumber = tiles[i + j * width_];
 
@@ -68,6 +71,7 @@ bool TileMap::load(const int* tiles) {
 			quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize_.x, (tv + 1) * tileSize_.y);
 			quad[3].texCoords = sf::Vector2f(tu * tileSize_.x, (tv + 1) * tileSize_.y);
 		}
+	}
 
 	return true;
 }

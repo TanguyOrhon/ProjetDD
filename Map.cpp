@@ -13,7 +13,6 @@ TileMap::TileMap(const char* tileset, const char* maptxt, unsigned int width, un
 }
 void TileMap::create_level() {
 	std::string content_((std::istreambuf_iterator<char>(tiles_)), (std::istreambuf_iterator<char>()));
-	std::cout << "test" << content_ << "\n";
 	auto str = explode(content_, ' ');
 	int level[450] = {};
 	int i = 0;

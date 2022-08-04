@@ -1,6 +1,6 @@
 #include "Personnages.h"
 
-Personnage::Personnage(const char* texture) :
+Entity::Entity(const char* texture) :
 	x_{ 200.0 },
 	y_{ 200.0 },
 	x_speed_{ 5.0 },
@@ -18,13 +18,13 @@ Personnage::Personnage(const char* texture) :
 	hitbox_ = sprite_.getGlobalBounds();
 }
 
-void Personnage::move(float x, float y) {
+void Entity::move(float x, float y) {
 	x_ = x_ + x * x_speed_;
 	y_ = y_ + y * y_speed_;
 	sprite_.setPosition(sf::Vector2f(x_, y_));
 }
 
-void Personnage::animation(float x, float y) {
+void Entity::animation(float x, float y) {
 	if (clock_.getElapsedTime().asSeconds() - fps_ > 1.0 / 10) {
 		fps_ = clock_.getElapsedTime().asSeconds();
 		anim_.x += 32;
@@ -36,7 +36,7 @@ void Personnage::animation(float x, float y) {
 	}
 }
 
-void Personnage::handle_event()
+void Entity::handle_event()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
@@ -60,7 +60,7 @@ void Personnage::handle_event()
 	}
 }
 
-void Personnage::collision(sf::FloatRect& otherhibox) {
+void Entity::collision(sf::FloatRect& otherhibox) {
 	if (hitbox_.intersects(otherhibox)) {
 		std::cout<<"collision""\n";
 	}

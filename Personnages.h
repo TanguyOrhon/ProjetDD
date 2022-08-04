@@ -3,9 +3,10 @@
 #include <SFML/GRAPHICS.hpp>
 #include <iostream>
 
-class Personnage {
+class Entity {
 public:
-	Personnage(const char* texture);
+	Entity(const char* texture);
+	virtual ~Entity() = default;
 
 	sf::Sprite getSprite() {
 		return sprite_;
@@ -39,5 +40,14 @@ private:
 	sf::FloatRect hitbox_;
 };
 
+class Monster : public Entity {
+	Monster();
+};
 
+class Perso : public Entity {
+public:
+	Perso(std::string name, const char* texture) : Entity(texture), name_(name){};
+private:
+	std::string name_;
+};
 #endif

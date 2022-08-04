@@ -10,10 +10,9 @@
 
 class Window {
 public:
-	Window(Personnage& perso, sf::RenderWindow& window, TileMap& map);
+	Window(std::unique_ptr<Entity> perso, sf::RenderWindow& window, TileMap& map);
 
 	void setView();
-	
 	void draw();
 	void step();
 
@@ -21,7 +20,7 @@ private:
 	sf::View view_;
 	sf::RenderWindow& window_;
 	sf::Vector2f window_size_;
-	Personnage& perso_;
+	std::unique_ptr<Entity> perso_;
 	TileMap& map_;
 };
 

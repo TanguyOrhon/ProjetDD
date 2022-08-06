@@ -12,10 +12,10 @@ int main()
 	sf::RenderWindow window;
 	window.create(sf::VideoMode(1920, 1080), "ProjetDD");
 	window.setPosition(sf::Vector2i(0, 0));
-	TileMap map("tiles/tileset.png", "tiles/map.txt", 25, 18);
+	TileMap map("tiles/tileset.png", "tiles/map.txt", "tiles/map_collisions.txt", 25, 18);
 	Window main_window(std::make_unique<Perso>("tanguy", "tiles/principal1.png"), window, map);
 
-	while (window.isOpen())
+	while (window.isOpen()) 
 	{
 		sf::Event event;
 		while (window.pollEvent(event))

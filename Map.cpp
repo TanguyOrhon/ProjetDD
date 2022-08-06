@@ -1,10 +1,10 @@
 #include "Map.h"
 
-TileMap::TileMap(const char* tileset, const char* maptxt, unsigned int width, unsigned int height) :
+TileMap::TileMap(const char* tileset, const char* map, const char* mapcollide, unsigned int width, unsigned int height) :
 	width_{ std::move(width) },
 	height_{ std::move(height) },
 	tileSize_{ 32.0,32.0 },
-	tiles_(maptxt)
+	tiles_(map)
 {
 	if (!m_tileset_.loadFromFile(tileset)) {
 		std::cout << "Pas de tileset";
@@ -22,6 +22,16 @@ void TileMap::create_level() {
 	}
 	load(level);
 }
+void TileMap::create_collide()
+{
+	std::string content_((std::istreambuf_iterator<char>(tiles_)), (std::istreambuf_iterator<char>()));
+	auto str = explode(content_, ' ');
+	int i = 0;
+	for (const std::string s : str) {
+		i += 1;
+		level_collide_[i] = std::stoi(s);
+	}
+}
 std::vector<std::string> TileMap::explode(std::string const& s, char delim)
 {
 	std::vector<std::string> result;
@@ -30,7 +40,6 @@ std::vector<std::string> TileMap::explode(std::string const& s, char delim)
 	for (std::string token; std::getline(iss, token, delim);)
 	{
 		result.push_back(token);
-		std::cout << token << "\n";
 	}
 	return result;
 }

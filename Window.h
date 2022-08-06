@@ -12,9 +12,11 @@ class Window {
 public:
 	Window(std::unique_ptr<Entity> perso, sf::RenderWindow& window, TileMap& map);
 
+	void handle_event();
 	void setView();
 	void draw();
 	void step();
+	void anim_perso(float x, float y);
 
 private:
 	sf::View view_;

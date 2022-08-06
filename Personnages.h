@@ -14,6 +14,9 @@ public:
 	sf::Vector2f getPosition() {
 		return sf::Vector2f(x_, y_);
 	}
+	sf::Vector2f getSpeed() {
+		return sf::Vector2f(x_speed_, y_speed_);
+	}
 	sf::Vector2u getSize() {
 		return texture_.getSize();
 	}
@@ -23,10 +26,8 @@ public:
 	void setAnim_y(unsigned int dir) {
 		anim_.y = dir;
 	}
-
 	void move(float x, float y);
 	void animation(float x, float y);
-	void handle_event();
 	void collision(sf::FloatRect& otherhibox);
 
 private:

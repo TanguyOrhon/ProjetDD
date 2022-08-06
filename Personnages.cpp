@@ -35,31 +35,6 @@ void Entity::animation(float x, float y) {
 		move(x, y);
 	}
 }
-
-void Entity::handle_event()
-{
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-	{
-		setAnim_y(0);
-		animation(0.0, 1.0);
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-	{
-		setAnim_y(144);
-		animation(0.0, -1.0);
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-	{
-		setAnim_y(96);
-		animation(1.0, 0.0);
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-	{
-		setAnim_y(48);
-		animation(-1.0, 0.0);
-	}
-}
-
 void Entity::collision(sf::FloatRect& otherhibox) {
 	if (hitbox_.intersects(otherhibox)) {
 		std::cout<<"collision""\n";

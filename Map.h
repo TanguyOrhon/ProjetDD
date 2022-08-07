@@ -19,14 +19,20 @@ public:
 	int get_level_collide(int i, int y) {
 		return level_collide_[i + y * 25];
 	}
+	sf::RectangleShape get_Debug_Collide(int i) {
+		return debug_collide_[i];
+	}
+	void debug_collide();
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	sf::VertexArray m_vertices_;
 	sf::Texture m_tileset_;
 	unsigned int width_, height_;
 	sf::Vector2f tileSize_;
-	std::ifstream tiles_;
+	std::ifstream map_;
+	std::ifstream map_collide_;
 	int level_collide_[450];
+	sf::RectangleShape debug_collide_[450];
 };
 
 

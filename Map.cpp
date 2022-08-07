@@ -4,15 +4,17 @@ TileMap::TileMap(const char* tileset, const char* map, const char* mapcollide, u
 	width_{ std::move(width) },
 	height_{ std::move(height) },
 	tileSize_{ 32.0,32.0 },
-	tiles_(map)
+	map_(map),
+	map_collide_{ mapcollide }
 {
 	if (!m_tileset_.loadFromFile(tileset)) {
 		std::cout << "Pas de tileset";
 	}
 	create_level();
+	create_collide();
 }
 void TileMap::create_level() {
-	std::string content_((std::istreambuf_iterator<char>(tiles_)), (std::istreambuf_iterator<char>()));
+	std::string content_((std::istreambuf_iterator<char>(map_)), (std::istreambuf_iterator<char>()));
 	auto str = explode(content_, ' ');
 	int level[450] = {};
 	int i = 0;
@@ -24,12 +26,13 @@ void TileMap::create_level() {
 }
 void TileMap::create_collide()
 {
-	std::string content_((std::istreambuf_iterator<char>(tiles_)), (std::istreambuf_iterator<char>()));
+	std::string content_((std::istreambuf_iterator<char>(map_collide_)), (std::istreambuf_iterator<char>()));
 	auto str = explode(content_, ' ');
 	int i = 0;
 	for (const std::string s : str) {
 		i += 1;
 		level_collide_[i] = std::stoi(s);
+		std::cout << level_collide_[i];
 	}
 }
 std::vector<std::string> TileMap::explode(std::string const& s, char delim)
@@ -68,10 +71,10 @@ bool TileMap::load(const int* tiles) {
 			sf::Vertex* quad = &m_vertices_[(i + j * width_) * 4];
 
 			// on définit ses quatre coins
-			quad[0].position = sf::Vector2f(i * tileSize_.x, j * tileSize_.y);
-			quad[1].position = sf::Vector2f((i + 1) * tileSize_.x, j * tileSize_.y);
-			quad[2].position = sf::Vector2f((i + 1) * tileSize_.x, (j + 1) * tileSize_.y);
-			quad[3].position = sf::Vector2f(i * tileSize_.x, (j + 1) * tileSize_.y);
+			quad[0].position = sf::Vector2f(i * 64.0, j * 64.0);
+			quad[1].position = sf::Vector2f((i + 1) * 64.0, j * 64.0);
+			quad[2].position = sf::Vector2f((i + 1) * 64.0, (j + 1) * 64.0);
+			quad[3].position = sf::Vector2f(i * 64.0, (j + 1) * 64.0);
 
 			// on définit ses quatre coordonnées de texture
 			quad[0].texCoords = sf::Vector2f(tu * tileSize_.x, tv * tileSize_.y);
@@ -82,6 +85,20 @@ bool TileMap::load(const int* tiles) {
 	}
 
 	return true;
+}
+
+void TileMap::debug_collide()
+{
+	for (unsigned int j = 0; j < 18; j++) {
+		for (unsigned int i = 0; i < 25; i++) {
+			if (level_collide_[i + j * 25] == 1) {
+				sf::Vector2f pos = sf::Vector2f(i * 64, j * 64);
+				debug_collide_[i + j * 25].setPosition(pos);
+				debug_collide_[i + j * 25].setSize(sf::Vector2f(64, 64));
+				debug_collide_[i + j * 25].setFillColor(sf::Color(250, 0, 0, 100));
+			}
+		}
+	}
 }
 
 void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const

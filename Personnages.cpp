@@ -1,8 +1,8 @@
 #include "Personnages.h"
 
 Entity::Entity(const char* texture) :
-	x_{ 200.0 },
-	y_{ 200.0 },
+	x_{ 0.0 },
+	y_{ 0.0 },
 	x_speed_{ 5.0 },
 	y_speed_{ 5.0 },
 	anim_{ 0,0 },

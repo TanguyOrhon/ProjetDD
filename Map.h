@@ -29,6 +29,7 @@ private:
 	sf::Texture m_tileset_;
 	unsigned int width_, height_;
 	sf::Vector2f tileSize_;
+	sf::Vector2f sizeMap_;
 	std::ifstream map_;
 	std::ifstream map_collide_;
 	int level_collide_[450];

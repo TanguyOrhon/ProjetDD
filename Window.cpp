@@ -18,11 +18,11 @@ void Window::setView() {
 void Window::draw() {
 	setView();
 	window_.draw(map_);
-	/*
+
 	map_.debug_collide();
 	for (int i = 0; i < 450; i++) {
 		window_.draw(map_.get_Debug_Collide(i));
-	}*/
+	}
 	window_.draw(perso_->getSprite());
 }
 
@@ -42,12 +42,11 @@ void Window::anim_perso(float x, float y)
 	sf::Vector2f pos = perso_->getPosition();
 	sf::Vector2u size = perso_->getSize();
 	sf::Vector2f speed = perso_->getSpeed();
-	int x_collide = round(((pos.x + x * speed.x + speed.x) / 64));
-	int y_collide = round(((pos.y + y * speed.y - speed.y) / 64));
-	int test = map_.get_level_collide(x_collide, y_collide);
+	float x_collide = (pos.x + x * speed.x) / 64;
+	float y_collide = (pos.y + y * speed.y) / 64;
+	std::cout << x_collide << "," << y_collide << "\n" << round(x_collide) << "," << round(y_collide) << "\n";	int test = map_.get_level_collide(round(x_collide), round(y_collide));
 	if (test == 0) {
 		perso_->animation(x, y);
-		std::cout << x_collide << "," << y_collide << "\n";
 	}
 }
 void Window::handle_event()

@@ -4,6 +4,7 @@ TileMap::TileMap(const char* tileset, const char* map, const char* mapcollide, u
 	width_{ std::move(width) },
 	height_{ std::move(height) },
 	tileSize_{ 32.0,32.0 },
+	sizeMap_{64.0,64.0},
 	map_(map),
 	map_collide_{ mapcollide }
 {
@@ -71,10 +72,10 @@ bool TileMap::load(const int* tiles) {
 			sf::Vertex* quad = &m_vertices_[(i + j * width_) * 4];
 
 			// on définit ses quatre coins
-			quad[0].position = sf::Vector2f(i * 64.0, j * 64.0);
-			quad[1].position = sf::Vector2f((i + 1) * 64.0, j * 64.0);
-			quad[2].position = sf::Vector2f((i + 1) * 64.0, (j + 1) * 64.0);
-			quad[3].position = sf::Vector2f(i * 64.0, (j + 1) * 64.0);
+			quad[0].position = sf::Vector2f(i * sizeMap_.x, j * sizeMap_.y);
+			quad[1].position = sf::Vector2f((i + 1) * sizeMap_.x, j * sizeMap_.y);
+			quad[2].position = sf::Vector2f((i + 1) * sizeMap_.x, (j + 1) * sizeMap_.y);
+			quad[3].position = sf::Vector2f(i * sizeMap_.x, (j + 1) * sizeMap_.y);
 
 			// on définit ses quatre coordonnées de texture
 			quad[0].texCoords = sf::Vector2f(tu * tileSize_.x, tv * tileSize_.y);
@@ -92,9 +93,9 @@ void TileMap::debug_collide()
 	for (unsigned int j = 0; j < 18; j++) {
 		for (unsigned int i = 0; i < 25; i++) {
 			if (level_collide_[i + j * 25] == 1) {
-				sf::Vector2f pos = sf::Vector2f(i * 64, j * 64);
+				sf::Vector2f pos = sf::Vector2f(i * sizeMap_.x, j * sizeMap_.y);
 				debug_collide_[i + j * 25].setPosition(pos);
-				debug_collide_[i + j * 25].setSize(sf::Vector2f(64, 64));
+				debug_collide_[i + j * 25].setSize(sf::Vector2f(sizeMap_.x, sizeMap_.y));
 				debug_collide_[i + j * 25].setFillColor(sf::Color(250, 0, 0, 100));
 			}
 		}

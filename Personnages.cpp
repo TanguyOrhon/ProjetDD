@@ -15,7 +15,6 @@ Entity::Entity(const char* texture) :
 	sprite_.setTexture(texture_);
 	sprite_.setPosition(sf::Vector2f(x_, y_));
 	sprite_.setTextureRect(sf::IntRect(0, 0, 32, 48));
-	hitbox_ = sprite_.getGlobalBounds();
 }
 
 void Entity::move(float x, float y) {

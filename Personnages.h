@@ -17,11 +17,8 @@ public:
 	sf::Vector2f getSpeed() {
 		return sf::Vector2f(x_speed_, y_speed_);
 	}
-	sf::Vector2u getSize() {
-		return texture_.getSize();
-	}
-	sf::FloatRect getHitbox() {
-		return hitbox_;
+	sf::FloatRect getSize() {
+		return sprite_.getLocalBounds();
 	}
 	void setAnim_y(unsigned int dir) {
 		anim_.y = dir;

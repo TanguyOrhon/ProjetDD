@@ -9,8 +9,8 @@ Window::Window(std::unique_ptr<Entity> perso, sf::RenderWindow& window, TileMap&
 	window_size_ = sf::Vector2f(window_.getSize());
 };
 void Window::setView() {
-	float position_x = perso_->getPosition().x + (float(perso_->getSize().x) / 2) - (window_size_.x / 2);
-	float position_y = perso_->getPosition().y + (float(perso_->getSize().y) / 2) - (window_size_.y / 2);
+	float position_x = perso_->getPosition().x + (float(perso_->getSize().width) / 2) - (window_size_.x / 2);
+	float position_y = perso_->getPosition().y + (float(perso_->getSize().height) / 2) - (window_size_.y / 2);
 	view_.reset(sf::FloatRect(position_x, position_y, window_size_.x, window_size_.y));
 	window_.setView(view_);
 }
@@ -40,11 +40,13 @@ void Window::step()
 void Window::anim_perso(float x, float y)
 {
 	sf::Vector2f pos = perso_->getPosition();
-	sf::Vector2u size = perso_->getSize();
+	sf::FloatRect size = perso_->getSize();
 	sf::Vector2f speed = perso_->getSpeed();
-	float x_collide = (pos.x + x * speed.x) / 64;
-	float y_collide = (pos.y + y * speed.y) / 64;
-	std::cout << x_collide << "," << y_collide << "\n" << round(x_collide) << "," << round(y_collide) << "\n";	int test = map_.get_level_collide(round(x_collide), round(y_collide));
+	std::cout << size.width << ',' << size.height << '\n';
+	float x_collide = (pos.x + x * speed.x - size.width / 2) / 64;
+	float y_collide = (pos.y + y * speed.y + size.height / 4) / 64;
+	//std::cout << x_collide << "," << y_collide << "\n" << round(x_collide) << "," << round(y_collide) << "\n";	
+	int test = map_.get_level_collide(round(x_collide), round(y_collide));
 	if (test == 0) {
 		perso_->animation(x, y);
 	}
